@@ -60,6 +60,11 @@ it('should support tags with CDATA', function(){
   });
 })
 
+it('should support tags with CDATA and without skipping the siblings', function() {
+  var node = parse('<TitleDetail><TitleType>01</TitleType><TitleElement><TitleText><![CDATA[7590L2PTM8]]></TitleText><TitleElementLevel>01</TitleElementLevel></TitleElement></TitleDetail>');
+  node.root.children[1].children.length.should.eql(2);
+})
+
 it('should support weird whitespace', function(){
   var node = parse('<foo \n\n\nbar\n\n=   \nbaz>\n\nhello world</\n\nfoo>');
   node.root.should.eql({
