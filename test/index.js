@@ -2,6 +2,7 @@
 var parse = require('..');
 var should = require('should');
 
+
 it('should support blank strings', function(){
   var node = parse('');
   node.should.eql({ declaration: undefined, root: undefined });
@@ -46,6 +47,16 @@ it('should support tags with text', function(){
     attributes: {},
     children: [],
     content: 'hello world'
+  });
+})
+
+it('should support tags with CDATA', function(){
+  var node = parse('<foo><![CDATA[hello world]]></foo>');
+  node.root.should.eql({
+    name: 'foo',
+    attributes: {},
+    children: [],
+    content: '<![CDATA[hello world]]>'
   });
 })
 
@@ -95,6 +106,23 @@ it('should support nested tags', function(){
     ],
     "content": ""
   })
+})
+
+it('should support nested tags with CDATA', function(){
+  var node = parse('<a><b><![CDATA[hello world]]></b></a>');
+  node.root.should.eql({
+    name: 'a',
+    attributes: {},
+    children: [
+      {
+        attributes: {},
+        children: [],
+        content: '<![CDATA[hello world]]>',
+        name: 'b'
+      }
+    ],
+    content: ''
+  });
 })
 
 it('should support nested tags with text', function(){

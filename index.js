@@ -114,7 +114,11 @@ function parse(xml) {
 
   function content() {
     debug('content %j', xml);
-    var m = match(/^([^<]*)/);
+    if (xml.slice(0,8) == "<![CDATA") {
+        var m = match(/^(.*?)(<\/)/);
+    } else {
+      var m = match(/^([^<]*)/);
+    }
     if (m) return m[1];
     return '';
   }
