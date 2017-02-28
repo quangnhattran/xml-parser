@@ -65,6 +65,16 @@ it('should support tags with CDATA and without skipping the siblings', function(
   node.root.children[1].children.length.should.eql(2);
 })
 
+it('should support multi-line CDATA', function() {
+  var node = parse('<foo><![CDATA[hello\nworld]]></foo>');
+  node.root.should.eql({
+    name: 'foo',
+    attributes: {},
+    children: [],
+    content: '<![CDATA[hello\nworld]]>'
+  });
+});
+
 it('should support weird whitespace', function(){
   var node = parse('<foo \n\n\nbar\n\n=   \nbaz>\n\nhello world</\n\nfoo>');
   node.root.should.eql({
