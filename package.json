@@ -1,5 +1,5 @@
 {
-  "name": "xml-parser-supports-CDATA",
+  "name": "xml-parser-supports-cdata",
   "version": "1.2.1",
   "repository": "quangnhattran/xml-parser",
   "description": "the little xml parser that could",
